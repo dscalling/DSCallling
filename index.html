@@ -3,33 +3,42 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="DSCalling: Kostenlose Coaching-Kurse und hochwertige Websites – persönlich von Dennis Stange erstellt." />
+  <meta name="description" content="Kostenlose Coaching-Kurse und hochwertige Websites – persönlich erstellt." />
   <title>DSCalling – Kostenloses Coaching & Premium Webdesign</title>
 
-  <!-- Lege logo.png und dennis.png in denselben Ordner wie diese index.html -->
-  <link rel="icon" href="logo.png" />
+  <!-- Favicon (optional): ersetze durch dein eigenes -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E" />
 
   <style>
+    /* ---------------------------
+       Design System
+    --------------------------- */
     :root{
       --bg: #0b0f1a;
       --bg2:#090d16;
       --card:#0f1628;
+      --card2:#0c1222;
       --text:#e8eefc;
       --muted:#a9b4d3;
       --line: rgba(255,255,255,.08);
       --brand:#7c5cff;
       --brand2:#18c8ff;
       --good:#34d399;
+      --warn:#fbbf24;
+      --bad:#fb7185;
       --shadow: 0 30px 80px rgba(0,0,0,.45);
       --radius: 18px;
       --radius2: 26px;
       --max: 1120px;
       --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
     }
+
+    /* Light mode */
     :root[data-theme="light"]{
       --bg:#f6f7fb;
       --bg2:#f0f2f9;
       --card:#ffffff;
+      --card2:#ffffff;
       --text:#0b1220;
       --muted:#4b5563;
       --line: rgba(15,23,42,.10);
@@ -49,61 +58,125 @@
     }
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
+
     .container{max-width:var(--max);margin:0 auto;padding:0 20px}
 
+    /* ---------------------------
+       Header
+    --------------------------- */
     header{
       position:sticky;top:0;z-index:40;
       backdrop-filter: blur(14px);
       background: color-mix(in oklab, var(--bg), transparent 35%);
       border-bottom:1px solid var(--line);
     }
-    .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
-    .brand{display:flex;gap:12px;align-items:center;font-weight:800;letter-spacing:.2px}
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;
+      height:72px;
+    }
+    .brand{
+      display:flex;gap:12px;align-items:center;
+      font-weight:700;letter-spacing:.2px;
+    }
     .logo{
       width:40px;height:40px;border-radius:12px;
       background: linear-gradient(135deg, rgba(124,92,255,1), rgba(24,200,255,1));
       box-shadow: 0 12px 30px rgba(124,92,255,.35);
       display:grid;place-items:center;
-      overflow:hidden;
-      padding:6px;
     }
-    .logo img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 10px 24px rgba(0,0,0,.25))}
+    .logo svg{width:22px;height:22px;fill:white}
 
     .menu{display:flex;gap:18px;align-items:center}
-    .menu a{font-size:14px;color:var(--muted);padding:10px 10px;border-radius:12px;transition:.2s}
+    .menu a{
+      font-size:14px;color:var(--muted);
+      padding:10px 10px;border-radius:12px;
+      transition: background .2s ease, color .2s ease;
+    }
     .menu a:hover{background:rgba(255,255,255,.06);color:var(--text)}
 
     .navRight{display:flex;gap:10px;align-items:center}
+
     .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:10px;
-      padding:12px 14px;border-radius:14px;border:1px solid var(--line);
-      background:rgba(255,255,255,.04);color:var(--text);
-      font-weight:700;font-size:14px;cursor:pointer;
-      transition: transform .15s ease, background .2s ease;
+      display:inline-flex;align-items:center;justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      font-weight:600;
+      font-size:14px;
+      cursor:pointer;
+      transition: transform .15s ease, background .2s ease, border .2s ease;
       user-select:none;
     }
     .btn:hover{transform: translateY(-1px);background:rgba(255,255,255,.06)}
-    .btn:active{transform: translateY(0) scale(.99)}
-    .btnPrimary{border:0;background: linear-gradient(135deg, var(--brand), var(--brand2));box-shadow: 0 18px 50px rgba(124,92,255,.28)}
+    .btn:active{transform: translateY(0px) scale(.99)}
+
+    .btnPrimary{
+      border:0;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 18px 50px rgba(124,92,255,.28);
+    }
+    .btnPrimary:hover{filter:saturate(1.05) brightness(1.03)}
+
     .iconBtn{width:44px;height:44px;padding:0;border-radius:14px}
 
     .hamburger{display:none}
-    .mobile{display:none;border-top:1px solid var(--line);padding:12px 0 18px}
+
+    /* Mobile menu */
+    .mobile{
+      display:none;
+      border-top:1px solid var(--line);
+      padding:12px 0 18px;
+    }
     .mobile a{display:block;padding:12px 10px;border-radius:14px;color:var(--muted)}
     .mobile a:hover{background:rgba(255,255,255,.06);color:var(--text)}
 
-    .hero{padding:68px 0 24px}
+    /* ---------------------------
+       Hero
+    --------------------------- */
+    .hero{padding:68px 0 24px;position:relative}
     .heroGrid{display:grid;grid-template-columns: 1.1fr .9fr;gap:34px;align-items:center}
-    .kicker{display:inline-flex;gap:10px;align-items:center;padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--muted);font-size:13px}
-    .dot{width:10px;height:10px;border-radius:999px;background:linear-gradient(135deg, var(--brand), var(--brand2));box-shadow: 0 0 0 6px rgba(124,92,255,.14)}
 
-    h1{margin:14px 0 14px;font-size: clamp(34px, 4vw, 54px);line-height:1.05;letter-spacing:-.6px}
+    .kicker{
+      display:inline-flex;gap:10px;align-items:center;
+      padding:8px 12px;border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      background:linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 0 0 6px rgba(124,92,255,.14);
+    }
+
+    h1{
+      margin:14px 0 14px;
+      font-size: clamp(34px, 4vw, 54px);
+      line-height:1.05;
+      letter-spacing:-.6px;
+    }
     .lead{color:var(--muted);font-size:16px;line-height:1.65;max-width:54ch}
+
     .heroCtas{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
-    .trustRow{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-top:20px;color:var(--muted);font-size:13px}
-    .pill{display:inline-flex;gap:8px;align-items:center;padding:8px 10px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03)}
+
+    .trustRow{
+      display:flex;gap:16px;flex-wrap:wrap;
+      align-items:center;
+      margin-top:20px;color:var(--muted);font-size:13px
+    }
+    .pill{
+      display:inline-flex;gap:8px;align-items:center;
+      padding:8px 10px;border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+    }
     .pill svg{width:16px;height:16px}
 
+    /* Hero card */
     .heroCard{
       border-radius: var(--radius2);
       border:1px solid var(--line);
@@ -122,78 +195,261 @@
     }
     .heroCardInner{position:relative;padding:22px}
 
-    .ownerRow{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:14px}
-    .avatar{width:86px;height:86px;border-radius:22px;overflow:hidden;border:1px solid var(--line);background:rgba(255,255,255,.03)}
-    .avatar img{width:100%;height:100%;object-fit:cover}
-
     .miniGrid{display:grid;grid-template-columns: 1fr 1fr;gap:14px}
-    .mini{background: var(--card);border:1px solid var(--line);border-radius: 18px;padding:14px}
+    .mini{
+      background: color-mix(in oklab, var(--card), transparent 0%);
+      border:1px solid var(--line);
+      border-radius: 18px;
+      padding:14px;
+    }
     .mini strong{display:block;font-size:14px;margin-bottom:6px}
     .mini span{color:var(--muted);font-size:13px;line-height:1.55}
 
-    .score{margin-top:14px;background: var(--card);border:1px solid var(--line);border-radius: 18px;padding:14px;display:flex;gap:12px;align-items:flex-start}
-    .badge{width:38px;height:38px;border-radius:14px;background:linear-gradient(135deg, rgba(52,211,153,.25), rgba(24,200,255,.18));border:1px solid rgba(255,255,255,.10);display:grid;place-items:center;flex:0 0 auto}
+    .score{
+      margin-top:14px;
+      background: color-mix(in oklab, var(--card), transparent 0%);
+      border:1px solid var(--line);
+      border-radius: 18px;
+      padding:14px;
+      display:flex;gap:12px;align-items:flex-start
+    }
+    .badge{
+      width:38px;height:38px;border-radius:14px;
+      background:linear-gradient(135deg, rgba(52,211,153,.25), rgba(24,200,255,.18));
+      border:1px solid rgba(255,255,255,.10);
+      display:grid;place-items:center;
+      flex:0 0 auto;
+    }
     .badge svg{width:18px;height:18px;fill:var(--good)}
 
+    /* ---------------------------
+       Sections / Cards
+    --------------------------- */
     section{padding:56px 0}
     .sectionHead{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:18px}
-    .sectionHead h2{margin:0;font-size: clamp(22px, 2.2vw, 30px);letter-spacing:-.3px}
+    .sectionHead h2{
+      margin:0;
+      font-size: clamp(22px, 2.2vw, 30px);
+      letter-spacing:-.3px;
+    }
     .sectionHead p{margin:0;color:var(--muted);max-width:70ch;line-height:1.65}
 
     .grid3{display:grid;grid-template-columns: repeat(3, 1fr);gap:16px}
-    .card{border:1px solid var(--line);background: var(--card);border-radius: var(--radius);padding:18px;box-shadow: 0 14px 40px rgba(0,0,0,.22);transition:.18s}
-    .card:hover{transform: translateY(-2px)}
+    .grid2{display:grid;grid-template-columns: repeat(2, 1fr);gap:16px}
+
+    .card{
+      border:1px solid var(--line);
+      background: color-mix(in oklab, var(--card), transparent 0%);
+      border-radius: var(--radius);
+      padding:18px;
+      box-shadow: 0 14px 40px rgba(0,0,0,.22);
+      transition: transform .18s ease, background .2s ease;
+    }
+    .card:hover{transform: translateY(-2px);background: color-mix(in oklab, var(--card), white 2%)}
     .card h3{margin:6px 0 10px;font-size:16px}
     .card p{margin:0;color:var(--muted);line-height:1.65;font-size:14px}
+
     .cardTop{display:flex;gap:12px;align-items:center;margin-bottom:6px}
-    .ico{width:42px;height:42px;border-radius:16px;display:grid;place-items:center;border:1px solid var(--line);background: linear-gradient(135deg, rgba(124,92,255,.18), rgba(24,200,255,.12))}
+    .ico{
+      width:42px;height:42px;border-radius:16px;
+      display:grid;place-items:center;
+      border:1px solid var(--line);
+      background: linear-gradient(135deg, rgba(124,92,255,.18), rgba(24,200,255,.12));
+    }
     .ico svg{width:18px;height:18px;fill:var(--text)}
 
-    .portfolio{display:grid;grid-template-columns: repeat(3, 1fr);gap:16px}
-    .shot{border-radius: 20px;border:1px solid var(--line);overflow:hidden;background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));position:relative;min-height: 220px}
+    /* Portfolio */
+    .portfolio{
+      display:grid;grid-template-columns: repeat(3, 1fr);gap:16px
+    }
+    .shot{
+      border-radius: 20px;
+      border:1px solid var(--line);
+      overflow:hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      position:relative;
+      min-height: 220px;
+    }
     .shot .meta{position:absolute;left:16px;right:16px;bottom:16px}
     .shot .meta strong{display:block;margin-bottom:6px}
     .shot .meta span{color:var(--muted);font-size:13px;line-height:1.5}
     .shot .tagRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
     .tag{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.03)}
-    .shot::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 260px at 20% 10%, rgba(124,92,255,.35), transparent 55%),radial-gradient(540px 240px at 90% 15%, rgba(24,200,255,.28), transparent 55%),linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01))}
-    .shot::after{content:"";position:absolute;inset:18px;border-radius:18px;border:1px dashed rgba(255,255,255,.16);opacity:.6}
 
-    details{border:1px solid var(--line);border-radius: 18px;background: var(--card);padding:14px 14px}
+    .shot::before{
+      content:"";
+      position:absolute;inset:0;
+      background:
+        radial-gradient(600px 260px at 20% 10%, rgba(124,92,255,.35), transparent 55%),
+        radial-gradient(540px 240px at 90% 15%, rgba(24,200,255,.28), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+    }
+    .shot::after{
+      content:"";
+      position:absolute;inset:18px;
+      border-radius:18px;
+      border:1px dashed rgba(255,255,255,.16);
+      opacity:.6;
+    }
+
+    /* Pricing */
+    .price{
+      padding:20px;
+      border-radius: 22px;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      position:relative;
+      overflow:hidden;
+    }
+    .price.featured{
+      border:1px solid rgba(124,92,255,.55);
+      box-shadow: 0 26px 80px rgba(124,92,255,.20);
+    }
+    .ribbon{
+      position:absolute;top:14px;right:-42px;
+      transform: rotate(18deg);
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      color:white;
+      padding:8px 54px;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.2px;
+      border-radius:999px;
+      box-shadow: 0 18px 50px rgba(124,92,255,.25);
+    }
+    .price h3{margin:0 0 6px;font-size:16px}
+    .price p{margin:0;color:var(--muted);font-size:13px;line-height:1.6}
+    .amount{margin:16px 0 14px;font-size:34px;font-weight:800;letter-spacing:-.6px}
+    .amount small{font-size:14px;color:var(--muted);font-weight:600}
+    .list{display:grid;gap:10px;margin:0 0 16px;padding:0;list-style:none}
+    .list li{display:flex;gap:10px;align-items:flex-start;color:var(--muted);font-size:14px;line-height:1.45}
+    .check{width:18px;height:18px;flex:0 0 auto;fill:var(--good);margin-top:2px}
+
+    /* FAQ */
+    details{
+      border:1px solid var(--line);
+      border-radius: 18px;
+      background: color-mix(in oklab, var(--card), transparent 0%);
+      padding:14px 14px;
+    }
     details+details{margin-top:10px}
-    summary{cursor:pointer;font-weight:800;list-style:none}
+    summary{cursor:pointer;font-weight:700;list-style:none}
     summary::-webkit-details-marker{display:none}
     details p{margin:10px 0 0;color:var(--muted);line-height:1.7}
 
-    .contactWrap{display:grid;grid-template-columns: 1fr 1fr;gap:16px;align-items:stretch}
-    form{display:grid;gap:10px}
+    /* Contact */
+    .contactWrap{
+      display:grid;grid-template-columns: 1fr 1fr;gap:16px;align-items:stretch
+    }
+    form{
+      display:grid;gap:10px
+    }
     label{font-size:13px;color:var(--muted)}
-    input, textarea{width:100%;padding:12px 12px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--text);outline:none;font-size:14px;transition:.2s}
+    input, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:var(--text);
+      outline:none;
+      font-size:14px;
+      transition: border .2s ease, background .2s ease;
+    }
     input:focus, textarea:focus{border-color:rgba(124,92,255,.65);background:rgba(255,255,255,.05)}
     textarea{min-height:120px;resize:vertical}
 
-    .divider{height:1px;background: linear-gradient(90deg, transparent, var(--line), transparent);margin: 14px 0 0}
-    .note{color:var(--muted);font-size:12px;line-height:1.6;margin-top:10px}
+    .note{
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.6;
+      margin-top:10px
+    }
 
+    /* Footer */
     footer{padding:32px 0;border-top:1px solid var(--line);color:var(--muted)}
     .foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+    .foot small{opacity:.9}
     .foot a{color:var(--muted)}
     .foot a:hover{color:var(--text)}
 
+    /* ---------------------------
+       Motion / Utilities
+    --------------------------- */
     .reveal{opacity:0;transform: translateY(10px);transition: opacity .6s ease, transform .6s ease}
     .reveal.show{opacity:1;transform:none}
 
+    .divider{
+      height:1px;
+      background: linear-gradient(90deg, transparent, var(--line), transparent);
+      margin: 14px 0 0;
+    }
+
+    /* ---------------------------
+       Booking modal (Kalender)
+    --------------------------- */
+    .modalOverlay{
+      position:fixed;inset:0;z-index:80;
+      background:rgba(0,0,0,.60);
+      backdrop-filter: blur(10px);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+    }
+    .modalOverlay.open{display:flex}
+    .modal{
+      width:min(980px, 100%);
+      max-height: min(86vh, 920px);
+      overflow:hidden;
+      border-radius: 22px;
+      border:1px solid var(--line);
+      background: color-mix(in oklab, var(--card2), transparent 0%);
+      box-shadow: var(--shadow);
+      position:relative;
+    }
+    .modalHeader{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:10px;
+      padding:14px 14px;
+      border-bottom:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    }
+    .modalHeader strong{font-size:14px;letter-spacing:.2px}
+    .closeBtn{
+      width:44px;height:44px;border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      display:grid;place-items:center;
+      cursor:pointer;
+      transition: transform .15s ease, background .2s ease;
+    }
+    .closeBtn:hover{transform: translateY(-1px);background:rgba(255,255,255,.06)}
+    .closeBtn:active{transform: translateY(0) scale(.99)}
+    .modalBody{padding:0}
+    .calWrap{height: min(72vh, 740px)}
+    .calFallback{padding:14px 14px;color:var(--muted);font-size:13px;line-height:1.6;border-top:1px solid var(--line)}
+
+    /* ---------------------------
+       Responsive
+    --------------------------- */
     @media (max-width: 960px){
-      .heroGrid{grid-template-columns: 1fr}
-      .portfolio{grid-template-columns: 1fr}
-      .grid3{grid-template-columns: 1fr}
-      .contactWrap{grid-template-columns: 1fr}
+      .heroGrid{grid-template-columns: 1fr;}
+      .portfolio{grid-template-columns: 1fr;}
+      .grid3{grid-template-columns: 1fr;}
+      .grid2{grid-template-columns: 1fr;}
+      .contactWrap{grid-template-columns: 1fr;}
       .menu{display:none}
       .hamburger{display:inline-flex}
       .mobile.open{display:block}
     }
+
+    /* Reduced motion */
     @media (prefers-reduced-motion: reduce){
-      .reveal,.btn,.card{transition:none}
+      .reveal{transition:none}
+      .btn{transition:none}
+      .card{transition:none}
     }
   </style>
 </head>
@@ -203,12 +459,10 @@
     <div class="container">
       <div class="nav">
         <a class="brand" href="#top" aria-label="Startseite">
-          <div class="logo" aria-hidden="true">
-            <img src="logo.png" alt="DSCalling Logo" />
-          </div>
+          <div class="logo" aria-hidden="true"><img src="Black and White Modern Entertainment Logo.png" alt="DSCalling Logo" style="width:100%;height:100%;object-fit:contain;border-radius:12px"/></div>
           <div>
             <div style="font-size:14px;line-height:1">DSCalling</div>
-            <div style="font-size:12px;color:var(--muted);font-weight:700;line-height:1.2">Dennis Stange • Coaching • Webdesign</div>
+            <div style="font-size:12px;color:var(--muted);font-weight:600;line-height:1.2">Kostenloses Coaching • Premium Webdesign</div>
           </div>
         </a>
 
@@ -216,6 +470,7 @@
           <a href="#coaching">Coaching</a>
           <a href="#websites">Websites</a>
           <a href="#portfolio">Portfolio</a>
+          <a href="#preise">Preise</a>
           <a href="#faq">FAQ</a>
           <a href="#kontakt">Kontakt</a>
         </nav>
@@ -223,11 +478,14 @@
         <div class="navRight">
           <button class="btn iconBtn" id="themeBtn" aria-label="Theme umschalten" title="Theme umschalten">
             <svg id="themeIcon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-              <path fill="currentColor" d="M12 18a6 6 0 1 1 6-6 6.01 6.01 0 0 1-6 6Z"/>
+              <path fill="currentColor" d="M12 18a6 6 0 1 1 6-6 6.01 6.01 0 0 1-6 6Zm0-10a4 4 0 1 0 4 4 4 4 0 0 0-4-4ZM12 2a1 1 0 0 1 1 1v1a1 1 0 0 1-2 0V3a1 1 0 0 1 1-1Zm0 18a1 1 0 0 1 1 1v1a1 1 0 0 1-2 0v-1a1 1 0 0 1 1-1ZM4.22 5.64a1 1 0 0 1 1.41 0l.71.71A1 1 0 0 1 4.93 7.78l-.71-.71a1 1 0 0 1 0-1.43Zm13.44 13.44a1 1 0 0 1 1.41 0l.71.71a1 1 0 0 1-1.41 1.41l-.71-.71a1 1 0 0 1 0-1.41ZM2 12a1 1 0 0 1 1-1h1a1 1 0 0 1 0 2H3a1 1 0 0 1-1-1Zm18 0a1 1 0 0 1 1-1h1a1 1 0 0 1 0 2h-1a1 1 0 0 1-1-1ZM5.64 19.78a1 1 0 0 1 0-1.41l.71-.71a1 1 0 0 1 1.41 1.41l-.71.71a1 1 0 0 1-1.41 0Zm13.44-13.44a1 1 0 0 1 0-1.41l.71-.71a1 1 0 0 1 1.41 1.41l-.71.71a1 1 0 0 1-1.41 0Z"/>
             </svg>
           </button>
 
-          <a class="btn btnPrimary" href="#kontakt">Gratis Erstgespräch</a>
+          <a class="btn btnPrimary js-book" href="#booking" aria-haspopup="dialog" aria-controls="bookingModal">
+            <span>Gratis Erstgespräch</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="white" d="M13.5 5a1 1 0 0 0 0 2H16l-7.3 7.29a1 1 0 1 0 1.42 1.42L17.41 8.41V11a1 1 0 0 0 2 0V5z"/></svg>
+          </a>
 
           <button class="btn iconBtn hamburger" id="hamburger" aria-label="Menü öffnen" title="Menü">
             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M4 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2Zm0 5h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2Zm0 5h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2Z"/></svg>
@@ -239,6 +497,7 @@
         <a href="#coaching">Coaching</a>
         <a href="#websites">Websites</a>
         <a href="#portfolio">Portfolio</a>
+        <a href="#preise">Preise</a>
         <a href="#faq">FAQ</a>
         <a href="#kontakt">Kontakt</a>
       </div>
@@ -246,41 +505,49 @@
   </header>
 
   <main id="top">
+    <!-- HERO -->
     <section class="hero">
+      <!-- Owner Portrait -->
+      <div style="display:none">Dennis Stange – Inhaber DSCalling</div>
       <div class="container">
         <div class="heroGrid">
           <div class="reveal">
-            <div class="kicker"><span class="dot" aria-hidden="true"></span> DSCalling • Kostenloses Coaching + Premium Websites (handgemacht)</div>
-            <h1>Mehr Kunden. Mehr Vertrauen.<br>Eine Website, die verkauft.</h1>
+            <div class="kicker"><span class="dot" aria-hidden="true"></span> Kostenloses Coaching + Premium Websites (handgemacht)</div>
+            <h1>Mehr Kunden. Mehr Vertrauen. <br/>Eine Website, die verkauft.</h1>
             <p class="lead">
-              Ich biete <strong>kostenlose Coaching-Kurse</strong> (Strategie, Marketing, Umsetzung) und erstelle als <strong>Dennis Stange</strong> bei
-              <strong>DSCalling</strong> hochwertige Websites, die schnell laden, seriös wirken und Ergebnisse liefern.
+              Ich biete <strong>kostenlose Coaching-Kurse</strong> (Strategie, Marketing, Umsetzung) und erstelle <strong>hochwertige Websites</strong>,
+              die schnell laden, seriös wirken und Ergebnisse liefern.
             </p>
 
             <div class="heroCtas">
-              <a class="btn btnPrimary" href="#coaching">Gratis Kurs starten</a>
-              <a class="btn" href="#websites">Websites ansehen</a>
+              <a class="btn btnPrimary" href="#coaching">
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="white" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm-1 14.5V7.5a1 1 0 0 1 1.53-.85l7 4.5a1 1 0 0 1 0 1.7l-7 4.5A1 1 0 0 1 11 16.5Z"/></svg>
+                <span>Gratis Kurs starten</span>
+              </a>
+              <a class="btn" href="#websites">
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M4 5a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3Zm3-1a1 1 0 0 0-1 1v2h14V5a1 1 0 0 0-1-1Zm13 6H6v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1Z"/></svg>
+                <span>Websites ansehen</span>
+              </a>
             </div>
 
             <div class="trustRow" aria-label="Vorteile">
-              <span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2 4 5v6c0 5 3.4 9.8 8 11 4.6-1.2 8-6 8-11V5zm-1 14-4-4 1.4-1.4L11 13.2l5.6-5.6L18 9z"/></svg> DSGVO-freundlich</span>
-              <span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 18h16v2H4zM5 4h14v10H5z"/></svg> Mobile-First</span>
-              <span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm1 11H7a1 1 0 0 1 0-2h5V6a1 1 0 0 1 2 0v6a1 1 0 0 1-1 1Z"/></svg> Schnell online</span>
+              <span class="pill">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2 4 5v6c0 5 3.4 9.8 8 11 4.6-1.2 8-6 8-11V5zm-1 14-4-4 1.4-1.4L11 13.2l5.6-5.6L18 9z"/></svg>
+                DSGVO-freundlich
+              </span>
+              <span class="pill">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 18h16v2H4zM5 4h14v10H5z"/></svg>
+                Mobile-First
+              </span>
+              <span class="pill">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm1 11H7a1 1 0 0 1 0-2h5V6a1 1 0 0 1 2 0v6a1 1 0 0 1-1 1Z"/></svg>
+                Schnell online
+              </span>
             </div>
           </div>
 
           <div class="heroCard reveal" aria-label="Ergebnis-Vorschau">
             <div class="heroCardInner">
-              <div class="ownerRow">
-                <div>
-                  <div style="font-weight:900;font-size:14px">Dennis Stange</div>
-                  <div style="color:var(--muted);font-size:13px;line-height:1.4">Inhaber von DSCalling</div>
-                </div>
-                <div class="avatar">
-                  <img src="dennis.png" alt="Porträt von Dennis Stange" />
-                </div>
-              </div>
-
               <div class="miniGrid">
                 <div class="mini">
                   <strong>Coaching (kostenlos)</strong>
@@ -302,12 +569,19 @@
                     Eine Seite, die <b>professionell wirkt</b>, <b>Leads einsammelt</b> und dir <b>Zeit spart</b>.
                     Optional: SEO-Basics, Tracking, Newsletter, Buchungskalender.
                   </div>
+                  <div class="divider"></div>
+                  <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+                    <span class="tag">Conversion-Layout</span>
+                    <span class="tag">Performance</span>
+                    <span class="tag">Copywriting</span>
+                    <span class="tag">Branding</span>
+                  </div>
                 </div>
               </div>
 
               <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
                 <a class="btn" href="#portfolio">Referenzen</a>
-                <a class="btn" href="#kontakt">Kontakt</a>
+                <a class="btn" href="#preise">Pakete</a>
               </div>
             </div>
           </div>
@@ -316,6 +590,7 @@
       </div>
     </section>
 
+    <!-- SERVICES -->
     <section id="websites">
       <div class="container">
         <div class="sectionHead">
@@ -329,28 +604,36 @@
         <div class="grid3">
           <div class="card reveal">
             <div class="cardTop">
-              <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M4 5a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3Zm3-1a1 1 0 0 0-1 1v2h14V5a1 1 0 0 0-1-1Zm13 6H6v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1Z"/></svg></div>
+              <div class="ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 5a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3Zm3-1a1 1 0 0 0-1 1v2h14V5a1 1 0 0 0-1-1Zm13 6H6v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1Z" fill="currentColor"/></svg>
+              </div>
               <div>
                 <h3>Individuelles Design</h3>
                 <p>Kein Template-Look. Deine Marke wirkt hochwertig, modern und konsistent.</p>
               </div>
             </div>
           </div>
+
           <div class="card reveal">
             <div class="cardTop">
-              <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm1 11H7a1 1 0 0 1 0-2h5V6a1 1 0 0 1 2 0v6a1 1 0 0 1-1 1Z"/></svg></div>
+              <div class="ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm1 11H7a1 1 0 0 1 0-2h5V6a1 1 0 0 1 2 0v6a1 1 0 0 1-1 1Z"/></svg>
+              </div>
               <div>
                 <h3>Performance & SEO-Basis</h3>
                 <p>Sauberer Code, schnelle Ladezeit, Meta-Daten & Struktur für Google.</p>
               </div>
             </div>
           </div>
+
           <div class="card reveal">
             <div class="cardTop">
-              <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M20 7H4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Zm0 10H4V9h16Z"/></svg></div>
+              <div class="ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20 7H4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Zm0 10H4V9h16Z"/></svg>
+              </div>
               <div>
                 <h3>Leads & Systeme</h3>
-                <p>Kontakt, Buchung, Newsletter, Tracking – genau das, was du brauchst.</p>
+                <p>Kontakt, Calendly/Buchung, Newsletter, Tracking – genau das, was du brauchst.</p>
               </div>
             </div>
           </div>
@@ -358,11 +641,12 @@
       </div>
     </section>
 
+    <!-- COACHING -->
     <section id="coaching">
       <div class="container">
         <div class="sectionHead">
           <div>
-            <h2>Kostenlose Coaching-Kurse von DSCalling</h2>
+            <h2>Kostenlose Coaching-Kurse</h2>
             <p>Für Selbstständige, Creator & kleine Unternehmen: von Positionierung bis Kundengewinnung – praxisnah, kurz, umsetzbar.</p>
           </div>
           <a class="btn btnPrimary" href="#kontakt">Platz sichern</a>
@@ -378,6 +662,7 @@
               </div>
             </div>
           </div>
+
           <div class="card reveal">
             <div class="cardTop">
               <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M4 4h16v4H4Zm0 6h10v10H4Zm12 0h4v10h-4Z"/></svg></div>
@@ -387,6 +672,7 @@
               </div>
             </div>
           </div>
+
           <div class="card reveal">
             <div class="cardTop">
               <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M3 12h7l3 8 3-16 2 8h3"/></svg></div>
@@ -397,27 +683,111 @@
             </div>
           </div>
         </div>
+
+        <div style="margin-top:16px" class="card reveal">
+          <div style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center">
+            <div>
+              <h3 style="margin:0 0 6px">Was ist kostenlos?</h3>
+              <p style="margin:0;color:var(--muted)">Die Kurse sind gratis. Wenn du eine Website willst, bekommst du ein transparentes Angebot.</p>
+            </div>
+            <a class="btn" href="#preise">Website-Pakete ansehen</a>
+          </div>
+        </div>
       </div>
     </section>
 
+    <!-- PORTFOLIO -->
     <section id="portfolio">
       <div class="container">
         <div class="sectionHead">
           <div>
             <h2>Portfolio (Platzhalter)</h2>
-            <p>Ersetze diese Karten später durch echte Screenshots/Links deiner Projekte.</p>
+            <p>Ersetze diese Karten später durch echte Screenshots/Links deiner Projekte. Optik und Layout sind schon „premium-ready“.</p>
           </div>
           <a class="btn" href="#kontakt">Ein Projekt starten</a>
         </div>
 
         <div class="portfolio">
-          <div class="shot reveal"><div class="meta"><strong>Landingpage – Coaching</strong><span>Conversion-optimiert, klare CTA, schnelle Ladezeit.</span><div class="tagRow"><span class="tag">Hero + Funnel</span><span class="tag">SEO</span><span class="tag">Mobile</span></div></div></div>
-          <div class="shot reveal"><div class="meta"><strong>Business Website – Dienstleistung</strong><span>Trust-Elemente, Referenzen, strukturierte Leistungen.</span><div class="tagRow"><span class="tag">Branding</span><span class="tag">Kontakt</span><span class="tag">Analytics</span></div></div></div>
-          <div class="shot reveal"><div class="meta"><strong>Portfolio – Kreativ</strong><span>Minimalistisch, hochwertig, schnelle Navigation.</span><div class="tagRow"><span class="tag">Galerie</span><span class="tag">Clean UI</span><span class="tag">Modern</span></div></div></div>
+          <div class="shot reveal">
+            <div class="meta">
+              <strong>Landingpage – Coaching</strong>
+              <span>Conversion-optimiert, klare CTA, schnelle Ladezeit.</span>
+              <div class="tagRow"><span class="tag">Hero + Funnel</span><span class="tag">SEO</span><span class="tag">Mobile</span></div>
+            </div>
+          </div>
+          <div class="shot reveal">
+            <div class="meta">
+              <strong>Business Website – Dienstleistung</strong>
+              <span>Trust-Elemente, Referenzen, strukturierte Leistungen.</span>
+              <div class="tagRow"><span class="tag">Branding</span><span class="tag">Kontakt</span><span class="tag">Analytics</span></div>
+            </div>
+          </div>
+          <div class="shot reveal">
+            <div class="meta">
+              <strong>Portfolio – Kreativ</strong>
+              <span>Minimalistisch, hochwertig, schnelle Navigation.</span>
+              <div class="tagRow"><span class="tag">Galerie</span><span class="tag">CMS-ready</span><span class="tag">Clean UI</span></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- PRICING -->
+    <section id="preise">
+      <div class="container">
+        <div class="sectionHead">
+          <div>
+            <h2>Website-Pakete</h2>
+            <p>Wähle das Paket, das zu deinem Stand passt. Alles ist skalierbar – wir starten schlank und bauen aus.</p>
+          </div>
+          <a class="btn" href="#kontakt">Preis anfragen</a>
+        </div>
+
+        <div class="grid3">
+          <div class="price reveal">
+            <h3>Start</h3>
+            <p>Für ein klares Angebot & seriöse Online-Präsenz.</p>
+            <div class="amount">ab 799€ <small>einmalig</small></div>
+            <ul class="list">
+              <li><svg class="check" viewBox="0 0 24 24"><path d="M20.3 6.7 10 17l-4.3-4.3 1.4-1.4L10 14.2l8.9-8.9z"/></svg> 1 Seite (Landingpage)</li>
+              <li><svg class="check" viewBox="0 0 24 24"><path d="M20.3 6.7 10 17l-4.3-4.3 1.4-1.4L10 14.2l8.9-8.9z"/></svg> Mobile-First + Performance</li>
+              <li><svg class="check" viewBox="0 0 24 24"><path d="M20.3 6.7 10 17l-4.3-4.3 1.4-1.4L10 14.2l8.9-8.9z"/></svg> Kontakt + CTA</li>
+            </ul>
+            <a class="btn" href="#kontakt">Anfragen</a>
+          </div>
+
+          <div class="price featured reveal">
+            <div class="ribbon">Beliebt</div>
+            <h3>Business</h3>
+            <p>Für Dienstleister, die Leads und Vertrauen brauchen.</p>
+            <div class="amount">ab 1499€ <small>einmalig</small></div>
+            <ul class="list">
+              <li><svg class="check" viewBox="0 0 24 24"><path d="M20.3 6.7 10 17l-4.3-4.3 1.4-1.4L10 14.2l8.9-8.9z"/></svg> 4–6 Seiten (Struktur + Copy)</li>
+              <li><svg class="check" viewBox="0 0 24 24"><path d="M20.3 6.7 10 17l-4.3-4.3 1.4-1.4L10 14.2l8.9-8.9z"/></svg> SEO-Basis + Tracking Setup</li>
+              <li><svg class="check" viewBox="0 0 24 24"><path d="M20.3 6.7 10 17l-4.3-4.3 1.4-1.4L10 14.2l8.9-8.9z"/></svg> Referenzen, FAQ, Lead-Flow</li>
+            </ul>
+            <a class="btn btnPrimary js-book" href="#booking" aria-haspopup="dialog" aria-controls="bookingModal">Kostenloses Erstgespräch</a>
+          </div>
+
+          <div class="price reveal">
+            <h3>Premium</h3>
+            <p>Für Markenaufbau, Systeme & skalierbare Inhalte.</p>
+            <div class="amount">ab 2499€ <small>einmalig</small></div>
+            <ul class="list">
+              <li><svg class="check" viewBox="0 0 24 24"><path d="M20.3 6.7 10 17l-4.3-4.3 1.4-1.4L10 14.2l8.9-8.9z"/></svg> Design-System + Komponenten</li>
+              <li><svg class="check" viewBox="0 0 24 24"><path d="M20.3 6.7 10 17l-4.3-4.3 1.4-1.4L10 14.2l8.9-8.9z"/></svg> Blog/CMS-ready (optional)</li>
+              <li><svg class="check" viewBox="0 0 24 24"><path d="M20.3 6.7 10 17l-4.3-4.3 1.4-1.4L10 14.2l8.9-8.9z"/></svg> Automationen & Integrationen</li>
+            </ul>
+            <a class="btn" href="#kontakt">Angebot erhalten</a>
+          </div>
+        </div>
+
+        <p class="note">Hinweis: Preise sind Platzhalter. Passe sie an deine echten Pakete an (oder entferne den Preisbereich komplett).</p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
     <section id="faq">
       <div class="container">
         <div class="sectionHead">
@@ -427,46 +797,63 @@
           </div>
         </div>
 
-        <details class="reveal"><summary>Wie läuft das kostenlose Coaching ab?</summary><p>Du bekommst regelmäßige Module mit klaren Aufgaben. Optional können wir im Erstgespräch kurz prüfen, wo du stehst und was als Nächstes Sinn ergibt.</p></details>
-        <details class="reveal"><summary>Wie bekomme ich Newsletter/Anfragen an deine E-Mail?</summary><p>Auf dieser Seite wird das über ein <b>mailto:</b> gelöst (öffnet deine E-Mail-App). Für „echtes“ Newsletter-Double-Opt-In integrieren wir z. B. Mailchimp/Brevo – die Zieladresse bleibt <b>dscalling.de@gmail.com</b>.</p></details>
-        <details class="reveal"><summary>Kannst du auch Shops oder komplexe Systeme bauen?</summary><p>Ja, je nach Bedarf (Shop, Buchung, Automationen, Tracking). Für komplexe Projekte definieren wir zuerst Ziele, Inhalte und Meilensteine.</p></details>
+        <details class="reveal">
+          <summary>Wie läuft das kostenlose Coaching ab?</summary>
+          <p>Du bekommst regelmäßige Module mit klaren Aufgaben. Optional können wir im Erstgespräch kurz prüfen, wo du stehst und was als Nächstes Sinn ergibt.</p>
+        </details>
+        <details class="reveal">
+          <summary>Baust du auch Shops oder komplexe Systeme?</summary>
+          <p>Ja, je nach Bedarf (z. B. Shop, Buchung, Newsletter, Automationen). Für komplexe Projekte definieren wir zuerst Ziele, Inhalte und Meilensteine.</p>
+        </details>
+        <details class="reveal">
+          <summary>Kann ich Inhalte und Texte selbst liefern?</summary>
+          <p>Klar. Wenn du möchtest, unterstütze ich zusätzlich mit Struktur, Copy-Optimierung und einem Text-Framework, damit alles wie aus einem Guss wirkt.</p>
+        </details>
+        <details class="reveal">
+          <summary>Wie schnell kann meine Website live gehen?</summary>
+          <p>Das hängt von Umfang und Content ab. Einfache Landingpages können sehr schnell umgesetzt werden, Multi-Page Projekte brauchen etwas mehr Abstimmung.</p>
+        </details>
       </div>
     </section>
 
+    <!-- CONTACT -->
     <section id="kontakt">
       <div class="container">
         <div class="sectionHead">
           <div>
-            <h2>Kontakt (DSCalling)</h2>
-            <p>Schreib mir kurz, was du vorhast. Ich (Dennis) melde mich mit einem Vorschlag (oder einem kurzen Call-Link).</p>
+            <h2>Kontakt</h2>
+            <p>Schreib mir kurz, was du vorhast. Ich melde mich mit einem Vorschlag (oder einem kurzen Call-Link).</p>
           </div>
         </div>
 
         <div class="contactWrap">
           <div class="card reveal">
-            <h3 style="margin:0 0 10px">Newsletter / Updates</h3>
-            <p style="margin:0 0 14px;color:var(--muted)">Trag dich ein – wir erstellen eine Mail an <b>dscalling.de@gmail.com</b>. (Echter Newsletter-Provider kann später integriert werden.)</p>
-            <form id="newsletterForm" data-to="dscalling.de@gmail.com">
-              <div>
-                <label for="nlEmail">E-Mail</label>
-                <input id="nlEmail" name="nlEmail" type="email" placeholder="name@beispiel.de" required />
-              </div>
-              <button class="btn btnPrimary" type="submit">Newsletter anfragen</button>
-              <div class="note" id="nlNote">✅ Zieladresse: <b>dscalling.de@gmail.com</b></div>
-            </form>
+            <h3 style="margin:0 0 10px">Schnellstart</h3>
+            <p style="margin:0 0 14px;color:var(--muted)">
+              Wenn du nur eine Sache beantworten willst:
+              <b>Was soll die Website für dich erreichen?</b>
+            </p>
+
+            <div style="display:grid;gap:10px">
+              <div class="pill"><span class="dot" aria-hidden="true"></span> Ziel: Leads, Buchungen oder Verkäufe</div>
+              <div class="pill"><span class="dot" aria-hidden="true"></span> Zielgruppe: Wer soll überzeugt werden?</div>
+              <div class="pill"><span class="dot" aria-hidden="true"></span> Angebot: Was ist das Ergebnis für den Kunden?</div>
+            </div>
 
             <div class="divider"></div>
 
-            <h3 style="margin:14px 0 10px">Schnellstart</h3>
-            <p style="margin:0;color:var(--muted)">Wenn du nur eine Sache beantworten willst: <b>Was soll die Website für dich erreichen?</b></p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+              <a class="btn" href="#coaching">Gratis Coaching</a>
+              <a class="btn btnPrimary" href="#websites">Website bauen lassen</a>
+            </div>
           </div>
 
           <div class="card reveal">
             <h3 style="margin:0 0 10px">Nachricht senden</h3>
-            <form id="contactForm" data-to="dscalling.de@gmail.com">
+            <form id="contactForm">
               <div>
                 <label for="name">Name</label>
-                <input id="name" name="name" type="text" placeholder="Dein Name" required />
+                <input id="name" name="name" type="text" placeholder="DSCalling" required />
               </div>
               <div>
                 <label for="email">E-Mail</label>
@@ -480,8 +867,12 @@
                 <label for="msg">Nachricht</label>
                 <textarea id="msg" name="msg" placeholder="Kurz dein Ziel + aktueller Stand…" required></textarea>
               </div>
-              <button class="btn btnPrimary" type="submit">Absenden</button>
-              <div class="note" id="formNote">Dieses Formular öffnet deine E-Mail-App und erstellt eine Nachricht an <b>dscalling.de@gmail.com</b> (mit Betreff & Text).</div>
+
+              <button class="btn btnPrimary" type="submit">
+                <span>Absenden</span>
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="white" d="M2 12 22 3l-4 18-7-6-4 3 1-5Z"/></svg>
+              </button>
+              <div class="note" id="formNote">Dieses Formular ist vorbereitet für echte Anfragen. E-Mails gehen an: <b>dscalling.de@gmail.com</b>.</div>
             </form>
           </div>
         </div>
@@ -492,17 +883,17 @@
       <div class="container">
         <div class="foot">
           <div style="display:flex;gap:12px;align-items:center">
-            <div class="logo" aria-hidden="true" style="width:34px;height:34px;border-radius:12px"><img src="logo.png" alt="DSCalling Logo" /></div>
+            <div class="logo" aria-hidden="true" style="width:34px;height:34px;border-radius:12px"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10.01 10.01 0 0 0 12 2Zm1 14.93V19a1 1 0 0 1-2 0v-2.07A8.01 8.01 0 0 1 4.07 13H7a1 1 0 0 1 0 2H6.17A8.02 8.02 0 0 0 11 16.93ZM18 13h-1a1 1 0 0 1 0-2h2.93A8.01 8.01 0 0 1 13 16.93Z"/></svg></div>
             <div>
-              <div style="font-weight:900;color:var(--text)">DSCalling</div>
-              <small>Dennis Stange • Coaching • Webdesign</small>
+              <div style="font-weight:800">DSCalling</div>
+              <small>Kostenloses Coaching • Premium Webdesign</small>
             </div>
           </div>
 
           <div style="display:flex;gap:14px;flex-wrap:wrap">
             <a href="#">Impressum</a>
             <a href="#">Datenschutz</a>
-            <a href="mailto:dscalling.de@gmail.com">E-Mail</a>
+            <a href="#kontakt">Kontakt</a>
           </div>
 
           <small>© <span id="year"></span> DSCalling. Alle Rechte vorbehalten.</small>
@@ -511,8 +902,40 @@
     </footer>
   </main>
 
+  <!-- Booking Modal (Calendly) -->
+  <div class="modalOverlay" id="bookingModal" role="dialog" aria-modal="true" aria-label="Erstgespräch buchen">
+    <div class="modal">
+      <div class="modalHeader">
+        <div>
+          <strong>Gratis Erstgespräch buchen</strong>
+          <div style="color:var(--muted);font-size:12px;margin-top:2px">Wähle einen Termin und beantworte kurz ein paar Fragen.</div>
+        </div>
+        <button class="closeBtn" id="bookingClose" aria-label="Schließen">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M18.3 5.71a1 1 0 0 0-1.41 0L12 10.59 7.11 5.7A1 1 0 0 0 5.7 7.11L10.59 12 5.7 16.89a1 1 0 1 0 1.41 1.41L12 13.41l4.89 4.89a1 1 0 0 0 1.41-1.41L13.41 12l4.89-4.89a1 1 0 0 0 0-1.4Z"/></svg>
+        </button>
+      </div>
+      <div class="modalBody">
+        <!--
+          ✅ HIER deinen Calendly-Link eintragen:
+          Ersetze die URL in data-url mit deinem echten Link.
+          Beispiel: https://calendly.com/dscalling-de/30min
+
+          In Calendly kannst du "Questions" hinzufügen (Name, E-Mail, etc.).
+        -->
+        <div class="calWrap">
+          <div class="calendly-inline-widget" data-url="https://calendly.com/DEIN-LINK/erstgespraech" style="min-width:320px;height:100%"></div>
+        </div>
+        <div class="calFallback">
+          Falls der Kalender nicht lädt, schreib direkt an <b>dscalling.de@gmail.com</b>.
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
+    // -----------------------------------
     // Smooth scroll
+    // -----------------------------------
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', (e) => {
         const href = a.getAttribute('href');
@@ -521,77 +944,116 @@
         if(!el) return;
         e.preventDefault();
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // close mobile nav if open
         mobileNav.classList.remove('open');
       });
     });
 
+    // -----------------------------------
     // Mobile nav
+    // -----------------------------------
     const mobileNav = document.getElementById('mobileNav');
     const hamburger = document.getElementById('hamburger');
-    hamburger?.addEventListener('click', () => mobileNav.classList.toggle('open'));
+    if (hamburger){
+      hamburger.addEventListener('click', () => {
+        mobileNav.classList.toggle('open');
+      });
+    }
 
+    // -----------------------------------
     // Reveal on scroll
+    // -----------------------------------
     const io = new IntersectionObserver((entries) => {
-      for (const e of entries){ if (e.isIntersecting) e.target.classList.add('show'); }
+      for (const e of entries){
+        if (e.isIntersecting) e.target.classList.add('show');
+      }
     }, { threshold: 0.12 });
+
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
+    // -----------------------------------
     // Theme toggle (persist)
+    // -----------------------------------
     const root = document.documentElement;
     const themeBtn = document.getElementById('themeBtn');
+
     const saved = localStorage.getItem('theme');
     if (saved === 'light' || saved === 'dark') root.setAttribute('data-theme', saved);
-    function setTheme(next){ root.setAttribute('data-theme', next); localStorage.setItem('theme', next); renderThemeIcon(); }
+
+    function setTheme(next){
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      renderThemeIcon();
+    }
+
     function renderThemeIcon(){
       const isLight = root.getAttribute('data-theme') === 'light';
       const icon = document.getElementById('themeIcon');
       if(!icon) return;
       icon.innerHTML = isLight
         ? '<path fill="currentColor" d="M21 12.8A8.5 8.5 0 0 1 11.2 3a7 7 0 1 0 9.8 9.8Z"/>'
-        : '<path fill="currentColor" d="M12 18a6 6 0 1 1 6-6 6.01 6.01 0 0 1-6 6Zm0-10a4 4 0 1 0 4 4 4 4 0 0 0-4-4ZM12 2a1 1 0 0 1 1 1v1a1 1 0 0 1-2 0V3a1 1 0 0 1 1-1Z"/>';
+        : '<path fill="currentColor" d="M12 18a6 6 0 1 1 6-6 6.01 6.01 0 0 1-6 6Zm0-10a4 4 0 1 0 4 4 4 4 0 0 0-4-4ZM12 2a1 1 0 0 1 1 1v1a1 1 0 0 1-2 0V3a1 1 0 0 1 1-1Zm0 18a1 1 0 0 1 1 1v1a1 1 0 0 1-2 0v-1a1 1 0 0 1 1-1ZM4.22 5.64a1 1 0 0 1 1.41 0l.71.71A1 1 0 0 1 4.93 7.78l-.71-.71a1 1 0 0 1 0-1.43Zm13.44 13.44a1 1 0 0 1 1.41 0l.71.71a1 1 0 0 1-1.41 1.41l-.71-.71a1 1 0 0 1 0-1.41Z"/>';
     }
-    themeBtn?.addEventListener('click', () => setTheme(root.getAttribute('data-theme') === 'light' ? 'dark' : 'light'));
+
+    themeBtn?.addEventListener('click', () => {
+      const cur = root.getAttribute('data-theme');
+      const next = cur === 'light' ? 'dark' : 'light';
+      setTheme(next);
+    });
+
+    // Default: dark if nothing saved
     if (!root.getAttribute('data-theme')) setTheme('dark');
 
-    // Mail helper
-    function encode(v){ return encodeURIComponent(String(v ?? '').trim()); }
+    // -----------------------------------
+    // -----------------------------------
+    // Booking modal (Calendly)
+    // -----------------------------------
+    const bookingModal = document.getElementById('bookingModal');
+    const bookingClose = document.getElementById('bookingClose');
+    const bookBtns = document.querySelectorAll('.js-book');
 
-    // Contact form -> mailto:dscalling.de@gmail.com
+    function openBooking(){
+      bookingModal?.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      // focus close for accessibility
+      bookingClose?.focus();
+    }
+    function closeBooking(){
+      bookingModal?.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    bookBtns.forEach(btn => btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openBooking();
+    }));
+
+    bookingClose?.addEventListener('click', closeBooking);
+    bookingModal?.addEventListener('click', (e) => {
+      if (e.target === bookingModal) closeBooking();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && bookingModal?.classList.contains('open')) closeBooking();
+    });
+
+    // -----------------------------------
+    // Contact form (demo)
+    // -----------------------------------
     const form = document.getElementById('contactForm');
     const note = document.getElementById('formNote');
     form?.addEventListener('submit', (e) => {
       e.preventDefault();
-      const to = form.getAttribute('data-to') || 'dscalling.de@gmail.com';
-      const name = document.getElementById('name')?.value || '';
-      const email = document.getElementById('email')?.value || '';
-      const topic = document.getElementById('topic')?.value || 'Anfrage';
-      const msg = document.getElementById('msg')?.value || '';
-
-      const subject = `DSCalling | ${topic}`;
-      const body =
-`Name: ${name}\nE-Mail: ${email}\n\nNachricht:\n${msg}\n\n—\nGesendet über dscalling.de`;
-
-      window.location.href = `mailto:${encode(to)}?subject=${encode(subject)}&body=${encode(body)}`;
-      note && (note.innerHTML = '✅ Öffne jetzt deine E-Mail-App: <b>dscalling.de@gmail.com</b> (Betreff & Text sind ausgefüllt).');
+      if (note){
+        note.innerHTML = '📩 Anfrage wird an <b>dscalling.de@gmail.com</b> gesendet (Backend/SMTP anbinden).';
+      }
       form.reset();
-    });
-
-    // Newsletter form -> mailto:dscalling.de@gmail.com
-    const nl = document.getElementById('newsletterForm');
-    const nlNote = document.getElementById('nlNote');
-    nl?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const to = nl.getAttribute('data-to') || 'dscalling.de@gmail.com';
-      const em = document.getElementById('nlEmail')?.value || '';
-      const subject = 'DSCalling | Newsletter-Anfrage';
-      const body = `Bitte zum Newsletter hinzufügen:\n\nE-Mail: ${em}\n\n—\nGesendet über dscalling.de`;
-      window.location.href = `mailto:${encode(to)}?subject=${encode(subject)}&body=${encode(body)}`;
-      nlNote && (nlNote.innerHTML = '✅ Anfrage wird als E-Mail an <b>dscalling.de@gmail.com</b> erstellt.');
-      nl.reset();
     });
 
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+    <!-- Calendly Widget Script -->
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+</script>
 </body>
 </html>
