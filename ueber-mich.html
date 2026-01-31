@@ -1,41 +1,201 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <title>Über mich – Dennis Stange | DSCalling</title>
-  <link rel="icon" href="logo.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Über Dennis Stange – Gründer von DSCalling." />
+  <title>Über mich – DSCalling</title>
+  <link rel="icon" href="logo.png" />
+  <style>
+    :root{--bg:#05060a;--card:rgba(255,255,255,.06);--card2:rgba(0,0,0,.35);--line:rgba(255,255,255,.10);--text:#f3f6ff;--muted:rgba(243,246,255,.75);--muted2:rgba(243,246,255,.55);--red:#c4141e;--red2:#ff2a3b;--green:#34d399;--shadow:0 28px 85px rgba(0,0,0,.60);--shadow2:0 14px 45px rgba(0,0,0,.45);--r:18px;--r2:26px;--max:1200px;--font:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;font-family:var(--font);color:var(--text);background:var(--bg);overflow-x:hidden}
+    a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
+    .container{max-width:var(--max);margin:0 auto;padding:0 22px}
+
+    .bg{position:fixed;inset:0;z-index:-3;background:radial-gradient(1200px 700px at 18% 18%, rgba(255,42,59,.12), transparent 60%),radial-gradient(900px 600px at 85% 10%, rgba(255,255,255,.06), transparent 60%),linear-gradient(180deg,#05060a,#070913)}
+    .bg::before{content:"";position:absolute;inset:-30px;background:url("bg.png") center/cover no-repeat;filter:blur(6px) saturate(1.15);opacity:.55;transform:scale(1.05);pointer-events:none}
+    .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg, rgba(0,0,0,.70) 0%, rgba(0,0,0,.45) 45%, rgba(0,0,0,.62) 100%),linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.65));pointer-events:none}
+
+    header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(0,0,0,.35);border-bottom:1px solid rgba(255,255,255,.08)}
+    .nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:14px;font-weight:900;letter-spacing:.2px}
+    .brand .logo{width:54px;height:38px;display:grid;place-items:center;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);box-shadow:0 14px 40px rgba(0,0,0,.45);overflow:hidden;padding:6px 10px}
+    .brand .logo img{width:100%;height:100%;object-fit:contain}
+    .brand .title{display:flex;flex-direction:column;line-height:1.1}
+    .brand .title strong{font-size:14px}
+    .brand .title span{font-size:12px;color:var(--muted2);font-weight:800}
+
+    nav.menu{display:flex;gap:22px;align-items:center}
+    nav.menu a{font-size:14px;color:var(--muted2);padding:10px 10px;border-radius:14px;transition:.2s}
+    nav.menu a:hover{color:var(--text);background:rgba(255,255,255,.06)}
+    .navRight{display:flex;gap:10px;align-items:center}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.05);color:var(--text);font-weight:900;font-size:14px;cursor:pointer;transition:.18s;user-select:none;white-space:nowrap}
+    .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.07)}
+    .btn:active{transform:translateY(0) scale(.99)}
+    .btnRed{border:1px solid rgba(255,42,59,.45);background:linear-gradient(135deg,var(--red),var(--red2));box-shadow:0 18px 60px rgba(255,42,59,.20)}
+    .btnGhost{background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.12)}
+    .hamburger{display:none;width:46px;height:46px;border-radius:14px;padding:0}
+    .mobile{display:none;border-top:1px solid rgba(255,255,255,.08);padding:10px 0 14px}
+    .mobile a{display:block;padding:12px 10px;border-radius:14px;color:var(--muted)}
+    .mobile a:hover{background:rgba(255,255,255,.06);color:var(--text)}
+    .mobile.open{display:block}
+
+    main{padding:48px 0 0}
+    .pageHero{padding:44px 0 10px}
+    .kicker{display:inline-flex;gap:10px;align-items:center;padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.05);color:var(--muted);font-size:13px}
+    .kDot{width:10px;height:10px;border-radius:999px;background:linear-gradient(135deg,var(--red),var(--red2));box-shadow:0 0 0 6px rgba(255,42,59,.12)}
+    h1{margin:16px 0 10px;font-size:clamp(34px,4vw,54px);line-height:1.05;letter-spacing:-.7px;text-shadow:0 14px 45px rgba(0,0,0,.55)}
+    .lead{margin:0;color:var(--muted);line-height:1.8;max-width:72ch}
+
+    .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;align-items:start;margin-top:20px}
+    .card{border:1px solid rgba(255,255,255,.10);background:rgba(0,0,0,.30);backdrop-filter:blur(10px);border-radius:var(--r);padding:18px;box-shadow:var(--shadow2)}
+    .card h2{margin:0 0 10px;font-size:18px}
+    .card p{margin:0;color:var(--muted2);line-height:1.75}
+    .list{display:grid;gap:10px;margin-top:12px}
+    .li{display:flex;gap:12px;align-items:flex-start;color:rgba(243,246,255,.92);font-weight:900}
+    .li svg{flex:0 0 auto;margin-top:2px}
+    .portrait{border-radius:var(--r2);overflow:hidden;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.04);box-shadow:var(--shadow);position:relative}
+    .portrait::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 420px at 30% 10%, rgba(255,42,59,.20), transparent 55%);pointer-events:none}
+    .portrait img{width:100%;height:auto}
+    .cap{position:absolute;left:14px;right:14px;bottom:14px;border-radius:16px;border:1px solid rgba(255,255,255,.10);background:rgba(0,0,0,.40);backdrop-filter:blur(10px);padding:12px;box-shadow:var(--shadow2)}
+    .cap strong{display:block}
+    .cap span{display:block;color:var(--muted2);font-size:12px;font-weight:900;margin-top:4px}
+
+    .cards2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+    footer{padding:34px 0;border-top:1px solid rgba(255,255,255,.08);color:var(--muted2);background:rgba(0,0,0,.25);backdrop-filter:blur(10px);margin-top:44px}
+    .foot{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+    @media (max-width:980px){nav.menu{display:none}.hamburger{display:inline-flex}.grid{grid-template-columns:1fr}.cards2{grid-template-columns:1fr}}
+  </style>
 </head>
 <body>
+  <div class="bg" aria-hidden="true"></div>
 
-<h1>Über mich</h1>
+  <header>
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="index.html" aria-label="Startseite">
+          <div class="logo"><img src="logo.png" alt="DSCalling Logo"></div>
+          <div class="title"><strong>DSCalling</strong><span>Telefonservice • Social Media • Webdesign</span></div>
+        </a>
 
-<p><strong>Ich bin Dennis Stange</strong>, Gründer von <strong>DSCalling</strong>.</p>
+        <nav class="menu" aria-label="Navigation">
+          <a href="index.html#leistungen">Leistungen</a>
+          <a href="meine-arbeit.html">Meine Arbeit</a>
+          <a href="ueber-mich.html">Über mich</a>
+          <a href="mein-weg.html">Mein Weg</a>
+          <a href="index.html#kontakt">Kontakt</a>
+        </nav>
 
-<p>
-Ich helfe Unternehmen dabei, <strong>professionell aufzutreten</strong>,
-<strong>mehr Kundenanfragen zu gewinnen</strong> und dabei
-<strong>weniger Stress im Alltag</strong> zu haben.
-</p>
+        <div class="navRight">
+          <button class="btn hamburger" id="hamburger" aria-label="Menü">☰</button>
+          <a class="btn btnRed" href="https://calendly.com/dscalling-de/30min?locale=de" target="_blank" rel="noopener">Jetzt starten</a>
+        </div>
+      </div>
 
-<p>
-Viele Selbstständige haben ein starkes Angebot –  
-aber keinen klaren Auftritt, keine Struktur und zu viel Chaos.
-Genau hier setze ich an.
-</p>
+      <div class="mobile" id="mobileNav" aria-label="Mobile Navigation">
+        <a href="index.html#leistungen">Leistungen</a>
+        <a href="meine-arbeit.html">Meine Arbeit</a>
+        <a href="ueber-mich.html">Über mich</a>
+        <a href="mein-weg.html">Mein Weg</a>
+        <a href="index.html#kontakt">Kontakt</a>
+      </div>
+    </div>
+  </header>
 
-<p>
-Mit DSCalling kombiniere ich <strong>Telefonservice</strong>,
-<strong>Social Media</strong> und <strong>hochwertige Websites</strong>
-zu einem System, das für meine Kunden zuverlässig funktioniert.
-</p>
+  <main>
+    <div class="container">
+      <section class="pageHero">
+        <div class="kicker"><span class="kDot"></span> Persönlichkeit & Vertrauen</div>
+        <h1>Über mich</h1>
+        <p class="lead">
+          Ich bin <b>Dennis Stange</b>, Gründer von <b>DSCalling</b>. Ich baue Systeme, die dir Zeit zurückgeben
+          und gleichzeitig dafür sorgen, dass <b>mehr Anfragen</b> reinkommen – über Telefon, Social Media und Website.
+        </p>
+      </section>
 
-<p>
-Ich arbeite bewusst <strong>persönlich, ehrlich und direkt</strong> –
-keine leeren Versprechen, sondern Lösungen, die im Alltag wirklich helfen.
-</p>
+      <div class="grid">
+        <div class="card">
+          <h2>Wofür DSCalling steht</h2>
+          <p>
+            Viele Unternehmen liefern top Arbeit – aber außen wirkt es nicht so. Zu viele Anrufe, Social Media ohne Plan,
+            Website ohne klare Richtung. DSCalling ist genau dafür gebaut: <b>Struktur, Klarheit, Ergebnisse</b>.
+          </p>
 
-<a href="index.html">← Zurück zur Startseite</a>
+          <div class="list">
+            <div class="li">
+              <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#34d399" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+              Ein Ansprechpartner (ich) – klare Kommunikation.
+            </div>
+            <div class="li">
+              <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#34d399" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+              Fokus auf Umsetzung statt leere Versprechen.
+            </div>
+            <div class="li">
+              <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#34d399" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+              Systeme, die im Alltag funktionieren.
+            </div>
+          </div>
 
+          <div style="height:14px"></div>
+          <a class="btn btnGhost" href="meine-arbeit.html">So arbeite ich</a>
+          <a class="btn btnRed" href="https://calendly.com/dscalling-de/30min?locale=de" target="_blank" rel="noopener" style="margin-left:8px">Erstgespräch</a>
+        </div>
+
+        <div class="portrait">
+          <img src="dennis.png" alt="Porträt von Dennis Stange">
+          <div class="cap">
+            <strong>Dennis Stange</strong>
+            <span>Gründer von DSCalling • Fokus: Telefon, Content, Conversion</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cards2">
+        <div class="card">
+          <h2>Was Kunden von mir bekommen</h2>
+          <p>
+            Kein Durcheinander. Keine „Marketing-Sprüche“. Sondern ein klares Setup, das dein Business nach außen stark macht
+            und innen entlastet. Wir schaffen <b>Vertrauen</b> und führen Interessenten sauber zum nächsten Schritt.
+          </p>
+        </div>
+        <div class="card">
+          <h2>Warum ich das mache</h2>
+          <p>
+            Ich mag es, wenn Dinge <b>einfach</b> sind: klare Kommunikation, saubere Umsetzung, ehrliche Ergebnisse.
+            DSCalling ist dafür da, dass du dich wieder auf dein Kerngeschäft konzentrieren kannst.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="brand" style="gap:12px">
+            <div class="logo" style="width:54px;height:38px"><img src="logo.png" alt="DSCalling Logo"></div>
+            <div class="title"><strong>DSCalling</strong><span>Dennis Stange • Telefonservice • Social Media • Webdesign</span></div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap">
+          <a href="index.html" style="color:var(--muted2)">Start</a>
+          <a href="index.html#kontakt" style="color:var(--muted2)">Kontakt</a>
+          <a href="mailto:dscalling.de@gmail.com" style="color:var(--muted2)">dscalling.de@gmail.com</a>
+        </div>
+        <div style="font-size:12px;color:var(--muted2)">© <span id="year"></span> DSCalling</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const mobileNav = document.getElementById('mobileNav');
+    const hamburger = document.getElementById('hamburger');
+    hamburger?.addEventListener('click', () => mobileNav.classList.toggle('open'));
+  </script>
 </body>
 </html>
