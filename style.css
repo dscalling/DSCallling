@@ -38,3 +38,28 @@
 .modalBody{padding:0}
 .calWrap{height: min(72vh, 740px)}
 .calFallback{padding:14px 14px;color:var(--muted);font-size:13px;line-height:1.6;border-top:1px solid var(--line)}
+
+.whatsapp-hint{
+  position:fixed;
+  right:90px;
+  bottom:28px;
+  background:rgba(0,0,0,.75);
+  color:#fff;
+  padding:10px 14px;
+  border-radius:14px;
+  font-size:14px;
+  font-weight:600;
+  box-shadow:0 12px 30px rgba(0,0,0,.35);
+  z-index:998;
+  animation:hintPulse 4s ease-in-out infinite;
+}
+
+@keyframes hintPulse{
+  0%,100%{opacity:.9}
+  50%{opacity:1}
+}
+
+@media (max-width:600px){
+  .whatsapp-hint{display:none;}
+}
+
