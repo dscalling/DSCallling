@@ -35,6 +35,124 @@
       --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
     }
 
+    <!-- Pre-Qualify Fragen (erscheint vor der Nutzung der Seite) -->
+<div class="preqOverlay" id="preqOverlay" aria-label="Fragebogen">
+  <div class="preqCard">
+    <div class="preqTop">
+      <div>
+        <h2>Kurze Fragen – damit ich dir schneller helfen kann</h2>
+        <p>10 Fragen • dauert ca. 60 Sekunden • danach kannst du direkt starten.</p>
+        <div class="preqProgress" aria-hidden="true"><div id="preqBar"></div></div>
+      </div>
+      <button class="preqClose" id="preqClose" aria-label="Schließen">✕</button>
+    </div>
+
+    <form id="preqForm" class="preqBody">
+      <div class="preqGrid">
+        <div class="preqItem">
+          <small>1) Name</small>
+          <input id="pq_name" required placeholder="Vorname Nachname">
+        </div>
+
+        <div class="preqItem">
+          <small>2) E-Mail</small>
+          <input id="pq_email" type="email" required placeholder="name@beispiel.de">
+        </div>
+
+        <div class="preqItem">
+          <small>3) Business / Branche</small>
+          <input id="pq_branch" required placeholder="z.B. Handwerk, Coaching, Gastro…">
+        </div>
+
+        <div class="preqItem">
+          <small>4) Welche Leistung interessiert dich am meisten?</small>
+          <select id="pq_service" required>
+            <option value="" selected disabled>Bitte wählen…</option>
+            <option>Telefonservice & Termine</option>
+            <option>Social Media Content</option>
+            <option>Premium Website & Funnel</option>
+            <option>Kombi-Paket (alles)</option>
+            <option>Ich bin unsicher</option>
+          </select>
+        </div>
+
+        <div class="preqItem">
+          <small>5) Dein Umsatzziel (nächste 3–6 Monate)</small>
+          <select id="pq_revenue" required>
+            <option value="" selected disabled>Bitte wählen…</option>
+            <option>5.000–10.000€ / Monat</option>
+            <option>10.000–25.000€ / Monat</option>
+            <option>25.000–50.000€ / Monat</option>
+            <option>50.000€+ / Monat</option>
+            <option>Ich weiß es noch nicht</option>
+          </select>
+        </div>
+
+        <div class="preqItem">
+          <small>6) Was ist aktuell dein größtes Problem?</small>
+          <select id="pq_problem" required>
+            <option value="" selected disabled>Bitte wählen…</option>
+            <option>Zu wenig Anfragen</option>
+            <option>Anfragen, aber schlecht qualifiziert</option>
+            <option>Zu viel Telefon/zu wenig Zeit</option>
+            <option>Unprofessioneller Auftritt</option>
+            <option>Social Media bringt nichts</option>
+          </select>
+        </div>
+
+        <div class="preqItem">
+          <small>7) Wie schnell willst du starten?</small>
+          <select id="pq_timeline" required>
+            <option value="" selected disabled>Bitte wählen…</option>
+            <option>Sofort</option>
+            <option>In 1–2 Wochen</option>
+            <option>In 1 Monat</option>
+            <option>Später / nur Info</option>
+          </select>
+        </div>
+
+        <div class="preqItem">
+          <small>8) Website vorhanden?</small>
+          <select id="pq_website" required>
+            <option value="" selected disabled>Bitte wählen…</option>
+            <option>Ja, aber schlecht</option>
+            <option>Ja, okay</option>
+            <option>Nein</option>
+          </select>
+        </div>
+
+        <div class="preqItem">
+          <small>9) Budget-Rahmen (grobe Richtung)</small>
+          <select id="pq_budget" required>
+            <option value="" selected disabled>Bitte wählen…</option>
+            <option>Unter 500€</option>
+            <option>500–1.500€</option>
+            <option>1.500–3.500€</option>
+            <option>3.500€+</option>
+            <option>Noch unklar</option>
+          </select>
+        </div>
+
+        <div class="preqItem" style="grid-column:1/-1">
+          <small>10) Kurzbeschreibung (2–3 Sätze)</small>
+          <textarea id="pq_text" required placeholder="Was bietest du an + was ist das Ziel?"></textarea>
+        </div>
+      </div>
+
+      <div class="preqFoot">
+        <button class="btn btnGhost" type="button" id="preqSkip">Überspringen</button>
+        <button class="btn btnRed" type="submit">Weiter zur Seite</button>
+      </div>
+
+      <div class="preqNote">
+        Mit „Weiter zur Seite“ wird eine Nachricht an <b>dscalling.de@gmail.com</b> vorbereitet (öffnet deine E-Mail-App).  
+        Optional speichern wir die Antworten lokal, damit du nicht jedes Mal gefragt wirst.
+      </div>
+    </form>
+  </div>
+</div>
+
+    
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
