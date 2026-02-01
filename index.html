@@ -1129,5 +1129,105 @@ Gesendet über dscalling.de`;
     });
 
   </script>
+  // ===== Pre-Qualify (10 Fragen) =====
+const preqOverlay = document.getElementById('preqOverlay');
+const preqForm = document.getElementById('preqForm');
+const preqClose = document.getElementById('preqClose');
+const preqSkip = document.getElementById('preqSkip');
+const preqBar = document.getElementById('preqBar');
+
+const preqFields = [
+  'pq_name','pq_email','pq_branch','pq_service','pq_revenue',
+  'pq_problem','pq_timeline','pq_website','pq_budget','pq_text'
+].map(id => document.getElementById(id));
+
+function preqFilledCount(){
+  let c = 0;
+  for(const el of preqFields){
+    if(!el) continue;
+    const v = String(el.value || '').trim();
+    if(v) c++;
+  }
+  return c;
+}
+
+function updatePreqBar(){
+  const filled = preqFilledCount();
+  const pct = Math.round((filled / preqFields.length) * 100);
+  if(preqBar) preqBar.style.width = pct + '%';
+}
+
+function openPreq(){
+  preqOverlay?.classList.add('open');
+  setTimeout(()=> preqFields[0]?.focus(), 150);
+}
+
+function closePreq(save=false){
+  if(save){
+    const data = {};
+    preqFields.forEach(el => data[el.id] = el.value);
+    localStorage.setItem('dscalling_preq_done', '1');
+    localStorage.setItem('dscalling_preq_data', JSON.stringify(data));
+  }
+  preqOverlay?.classList.remove('open');
+}
+
+function shouldShowPreq(){
+  // Wenn du willst, dass es JEDEM immer angezeigt wird:
+  // return true;
+  return localStorage.getItem('dscalling_preq_done') !== '1';
+}
+
+// Öffnen beim Laden
+window.addEventListener('load', () => {
+  if(shouldShowPreq()) openPreq();
+  updatePreqBar();
+});
+
+preqFields.forEach(el => el?.addEventListener('input', updatePreqBar));
+preqClose?.addEventListener('click', ()=> closePreq(false));
+preqSkip?.addEventListener('click', ()=> closePreq(true));
+
+// Submit -> Mail vorbereiten + speichern + schließen
+preqForm?.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const data = {};
+  preqFields.forEach(el => data[el.id] = String(el.value || '').trim());
+
+  // Speichern, damit Besucher nicht erneut gefragt wird
+  localStorage.setItem('dscalling_preq_done', '1');
+  localStorage.setItem('dscalling_preq_data', JSON.stringify(data));
+
+  const to = 'dscalling.de@gmail.com';
+  const subject = 'DSCalling | Vorqualifizierung (Website)';
+
+  const body =
+`VORQUALIFIZIERUNG – DSCalling
+
+Name: ${data.pq_name}
+E-Mail: ${data.pq_email}
+Branche: ${data.pq_branch}
+
+Leistung: ${data.pq_service}
+Umsatzziel: ${data.pq_revenue}
+Problem: ${data.pq_problem}
+Start: ${data.pq_timeline}
+Website vorhanden: ${data.pq_website}
+Budget: ${data.pq_budget}
+
+Kurzbeschreibung:
+${data.pq_text}
+
+—
+Gesendet über dscalling.de`;
+
+  // erst schließen, dann mailto öffnen (sauberer UX)
+  closePreq(false);
+  setTimeout(() => {
+    window.location.href = `mailto:${enc(to)}?subject=${enc(subject)}&body=${enc(body)}`;
+  }, 200);
+});
+
 </body>
 </html>
