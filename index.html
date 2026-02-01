@@ -212,18 +212,19 @@
         radial-gradient(700px 380px at 85% 30%, rgba(255,255,255,.10), transparent 60%);
       pointer-events:none;
     }
-  .portrait{
+ .portrait{
   position:absolute;
-  right:-30px;
-  bottom:0;
+  right:-80px;      /* ⬅️ weiter nach links */
+  top:50%;
+  transform: translateY(-25%); /* ⬇️ weiter nach unten */
   width:560px;
   max-width:96%;
-  transform: translateY(10px);
-  filter: 
-    drop-shadow(0 40px 110px rgba(0,0,0,.75))
-    drop-shadow(0 0 60px rgba(255,42,59,.15));
-  z-index:2;
+  z-index:3;
+  filter:
+    drop-shadow(0 45px 120px rgba(0,0,0,.8))
+    drop-shadow(0 0 70px rgba(255,42,59,.18));
 }
+
 
 
  .portrait img{
